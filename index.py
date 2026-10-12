@@ -1,47 +1,9 @@
 import math
-from typing import TypedDict
 import matplotlib.pyplot as plt
 
-class Coordinates(TypedDict):
-    y: float
-    x: float
-
-# Globala variabler
-K = 1 # N/m
-g = 9.82 # m/s^2
-total_p_mass = 1 # kg
-f_length_0 = 1 # m
-
-# Randvillkoren 
-ry = 0
-rx0 = 0
-rx1 = 1
-
-# Tält fästen 
-ymax = 1
-xmax1 = 1/3
-xmax2 = 2/3
-
-# Start koordinater
-p_coordinates: list[Coordinates] = [
-    {"y": ry, "x": rx0},
-    {"y": ymax, "x": xmax1},
-    {"y": ymax, "x": xmax2},
-    {"y": ry, "x": rx1}
-]
-
-# Hjälp funktioner 
-def calc_p_mass(N: int) -> float:
-    return total_p_mass / N
-
-def calc_spring_length(N: int) -> float:
-    return f_length_0 / (N - 1)
-
-def calc_spring_k(N: int) -> float:
-    return (N-1)*K 
-
-def get_pos(index: int) -> Coordinates:
-    return p_coordinates[index]
+from helpers import calc_spring_k, calc_p_mass, calc_spring_length, get_pos
+from tent_types import Coordinates
+from globals import p_coordinates, g
 
 def calc_spring_force(xn: float, yn: float, xj: float, yj: float, k: float, spring_length: float) -> tuple[float, float]:
     dx = xj - xn
@@ -94,7 +56,7 @@ def calc_fix_point_iteration(N: int):
         n += 1
 
         if n > 20:
-            # print(p_coordinates)
+            print(p_coordinates)
             break
 
 def render_tent():
@@ -112,7 +74,6 @@ def render_tent():
     ) 
     ax.legend() 
     plt.show() 
-
 
 render_tent()
 

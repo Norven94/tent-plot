@@ -1,8 +1,8 @@
 import math
 import matplotlib.pyplot as plt
 
-from helpers import calc_spring_k, calc_p_mass, calc_spring_length, get_pos
-from tent_types import Coordinates
+from helpers import calc_spring_k, calc_p_mass, calc_spring_length, get_pos, calc_fixed_ns, create_initial_coordinates, calc_max_force
+from tent_types import Forces
 from globals import p_coordinates, g
 
 def calc_spring_force(xn: float, yn: float, xj: float, yj: float, k: float, spring_length: float) -> tuple[float, float]:
@@ -16,10 +16,11 @@ def calc_spring_force(xn: float, yn: float, xj: float, yj: float, k: float, spri
     fx = k * d_length * ((xj-xn) / new_spring_length)
     fy = k * d_length * ((yj-yn) / new_spring_length)
 
+
     return fx, fy
 
 # Beräknar krafterna i x och y-led för partikel n. 
-def calc_p_force(N: int, n: int) -> tuple[float, float, Coordinates]:
+def calc_p_force(N: int, n: int) -> tuple[float, float]:
     # Flytta dessa senare, den behöver bara räknas en gång
     k = calc_spring_k(N)
     p_mass = calc_p_mass(N)
@@ -37,30 +38,38 @@ def calc_p_force(N: int, n: int) -> tuple[float, float, Coordinates]:
     fx_tot = p_before_spring_force[0] + p_after_spring_force[0]
     fy_tot = - p_mass * g + p_before_spring_force[1] + p_after_spring_force[1]
 
-    return fx_tot, fy_tot, p
+    return fx_tot, fy_tot
 
 def calc_fix_point_iteration(N: int):
     alpha = 0.02
     TOL = 1e-6
     n = 0
+    fixed_ns = calc_fixed_ns(N)
+    create_initial_coordinates(N, fixed_ns)
     
     while True:
-        N = len(p_coordinates)
-        f_x, f_y, previous_coordinates = calc_p_force(N, n)
-        new_x_pos = previous_coordinates["x"] + alpha * f_x
-        new_y_pos = previous_coordinates["y"] + alpha * f_y
-        p_coordinates.insert(n + 1, {
-            "x": new_x_pos,
-            "y": new_y_pos
-        })
-        n += 1
+        p_forces: list[Forces] = []
 
-        if n > 20:
-            print(p_coordinates)
+        for n in range(N - 1):
+            if n in fixed_ns:
+                p_forces.append({"f_x": 0, "f_y": 0})
+            else:
+                f_x, f_y = calc_p_force(N, n)
+                p_forces.append({"f_x": f_x, "f_y": f_y})
+
+        if calc_max_force(p_forces, fixed_ns) < TOL:
             break
+        else:     
+            for n, force in enumerate(p_forces):
+                if n in fixed_ns:
+                    continue      
+
+                p_coordinates[n]["x"] += alpha * force["f_x"]
+                p_coordinates[n]["y"] += alpha * force["f_y"]
+
 
 def render_tent():
-    calc_fix_point_iteration(3)
+    calc_fix_point_iteration(25)
     x = [coordinate["x"] for coordinate in p_coordinates]
     y = [coordinate["y"] for coordinate in p_coordinates]
 

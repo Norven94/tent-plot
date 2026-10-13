@@ -1,10 +1,15 @@
 from tent_types import Coordinates
 
-# Globala variabler
-K = 1 # N/m
+# Fasta variabler
 g = 9.82 # m/s^2
+total_spring_k = 1 # N/m
 total_p_mass = 1 # kg
-f_length_0 = 1 # m
+total_spring_length = 1 # m
+
+# Variabler baserade på val av N
+spring_k = 0
+p_mass = 0
+spring_length = 0
 
 # Randvillkoren 
 ry = 0

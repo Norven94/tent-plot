@@ -10,6 +10,10 @@ from helpers import calc_spring_k, calc_p_mass, calc_spring_length, create_initi
 from render import render_tent, multi_render_tent
 from calculations import calc_fix_point_iteration
 
+def reset() -> None: 
+    globals.max_forces.clear()
+    globals.p_coordinates.clear()
+
 def init_setup(N: int) -> None:    
     create_initial_coordinates(N)
     globals.spring_k = calc_spring_k(N)
@@ -25,7 +29,7 @@ def start_cli() -> None:
         if N == 1:
             init_setup(25)
             render_tent()
-            globals.p_coordinates.clear()
+            reset()
         elif N == 2:
             # Max 4 värden annars måste fler färger läggas till i render.py
             runs = [5, 10, 25, 100]            
@@ -35,7 +39,7 @@ def start_cli() -> None:
 
                 # Sparar ner en kopia av koordinaterna som precis kördes och tömmer sedan ursprungslistan igen så vi kan köra från start igen 
                 globals.archive_coordinates.append(globals.p_coordinates.copy())
-                globals.p_coordinates.clear()
+                reset()
 
             multi_render_tent(runs)
         else:

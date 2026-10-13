@@ -32,3 +32,6 @@ p_coordinates: list[Coordinates] = []
 
 # Arkiv över koordinater för masskörning
 archive_coordinates: list[list[Coordinates]] = []
+
+# Data för maximala kraften under respektive fixpunktsiteration
+max_forces: list[float] = []

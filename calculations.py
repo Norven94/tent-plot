@@ -24,6 +24,9 @@ def calc_max_force(p_forces: list[Forces], fixed_ns: list[int]) -> float:
             if total_p_force > max_force:
                 max_force = total_p_force
 
+    # Behåller max_force efter varje fixpunktsiteration så den kan plotas ut senare
+    globals.max_forces.append(max_force)
+
     return max_force
 
 def calc_spring_force(xn: float, yn: float, xj: float, yj: float, k: float, spring_length: float) -> tuple[float, float]:

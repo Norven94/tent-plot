@@ -1,3 +1,9 @@
+# Filename: globals.py
+# Author:   Oskar Anderberg (941201)
+# Created:  2026-10-13
+# Description:  Globala variabler som samtliga moduler behöver ha tillgång till utan
+#               att behöva skicka med de som parametrar i funktionerna.
+
 from tent_types import Coordinates
 
 # Fasta variabler

@@ -1,8 +1,30 @@
+# Filename: calculations.py
+# Author:   Oskar Anderberg (941201)
+# Created:  2026-10-13
+# Description:  Beräknar olika fjäderkrafter samt gravitationskraft på en partikel. Samt kör en fixpunktsalgoritm 
+#               för att uppdatera respektive partikels koordinater utefter de uträknade krafterna som påverkar dem. 
+
 import math
 import globals
 
-from helpers import get_pos, get_fixed_ns, calc_max_force
+from helpers import get_pos, get_fixed_ns
 from tent_types import Forces
+
+# Returnerar kraften för den partikel med högst kraft
+def calc_max_force(p_forces: list[Forces], fixed_ns: list[int]) -> float:
+    max_force = 0
+
+    for n, force in enumerate(p_forces):
+            if n in fixed_ns:
+                continue
+
+            # Den sammanställda partikelns kraft 
+            total_p_force = math.sqrt(force["f_x"]**2 + force["f_y"]**2)
+
+            if total_p_force > max_force:
+                max_force = total_p_force
+
+    return max_force
 
 def calc_spring_force(xn: float, yn: float, xj: float, yj: float, k: float, spring_length: float) -> tuple[float, float]:
     dx = xj - xn

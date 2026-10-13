@@ -1,3 +1,8 @@
+# Filename: render.py
+# Author:   Oskar Anderberg (941201)
+# Created:  2026-10-13
+# Description:  Hanterar all grafisk rendering för två olika körlägen.
+
 import matplotlib.pyplot as plt
 import globals
 

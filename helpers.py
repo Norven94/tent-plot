@@ -1,3 +1,9 @@
+# Filename: helpers.py
+# Author:   Oskar Anderberg (941201)
+# Created:  2026-10-13
+# Description:  Diverse mindre hjälpfunktioner som används i applicationen. Exempelvis för att beräkna vissa värden eller
+#               skapa upp de initiala koordinaterna för tältet.
+
 import math
 import globals
 
@@ -51,22 +57,6 @@ def create_initial_coordinates(N: int) -> None:
                 fixed = False
 
         globals.p_coordinates.append({ "x": x, "y": y, "fixed": fixed })
-
-# Returnerar kraften för den partikel med högst kraft
-def calc_max_force(p_forces: list[Forces], fixed_ns: list[int]) -> float:
-    max_force = 0
-
-    for n, force in enumerate(p_forces):
-            if n in fixed_ns:
-                continue
-
-            # Den sammanställda partikelns kraft 
-            total_p_force = math.sqrt(force["f_x"]**2 + force["f_y"]**2)
-
-            if total_p_force > max_force:
-                max_force = total_p_force
-
-    return max_force
     
 def get_pos(index: int) -> Coordinates:
     return globals.p_coordinates[index]

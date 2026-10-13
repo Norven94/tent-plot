@@ -1,3 +1,9 @@
+# Filename: main.py
+# Author:   Oskar Anderberg (941201)
+# Created:  2026-10-13
+# Description:  Applicationens huvud, här startar vi applicationen och säger till den vilket läge vi 
+#               vill köra.
+ 
 import globals
 
 from helpers import calc_spring_k, calc_p_mass, calc_spring_length, create_initial_coordinates

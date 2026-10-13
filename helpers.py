@@ -27,11 +27,11 @@ def create_initial_coordinates(N: int) -> None:
         if n == 0 or n == N - 1:
             y = globals.ry
             fixed = True
-        elif x == globals.xmax1:
+        elif n == round(globals.xmax1 * (N - 1)):
             x = globals.xmax1
             y = globals.ymax
             fixed = True
-        elif x == globals.xmax2:
+        elif n == round(globals.xmax2 * (N - 1)):
             x = globals.xmax2
             y = globals.ymax
             fixed = True
@@ -65,7 +65,7 @@ def calc_max_force(p_forces: list[Forces], fixed_ns: list[int]) -> float:
 
             if total_p_force > max_force:
                 max_force = total_p_force
-                
+
     return max_force
     
 def get_pos(index: int) -> Coordinates:

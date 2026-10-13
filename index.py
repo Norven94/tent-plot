@@ -1,7 +1,7 @@
 import math
 import matplotlib.pyplot as plt
 
-from helpers import calc_spring_k, calc_p_mass, calc_spring_length, get_pos, calc_fixed_ns, create_initial_coordinates, calc_max_force
+from helpers import calc_spring_k, calc_p_mass, calc_spring_length, get_pos, get_fixed_ns, create_initial_coordinates, calc_max_force
 from tent_types import Forces
 from globals import p_coordinates, g
 
@@ -15,7 +15,6 @@ def calc_spring_force(xn: float, yn: float, xj: float, yj: float, k: float, spri
 
     fx = k * d_length * ((xj-xn) / new_spring_length)
     fy = k * d_length * ((yj-yn) / new_spring_length)
-
 
     return fx, fy
 
@@ -41,11 +40,11 @@ def calc_p_force(N: int, n: int) -> tuple[float, float]:
     return fx_tot, fy_tot
 
 def calc_fix_point_iteration(N: int):
+    create_initial_coordinates(N)
     alpha = 0.02
     TOL = 1e-6
     n = 0
-    fixed_ns = calc_fixed_ns(N)
-    create_initial_coordinates(N, fixed_ns)
+    fixed_ns = get_fixed_ns()
     
     while True:
         p_forces: list[Forces] = []

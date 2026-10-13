@@ -17,9 +17,4 @@ xmax1 = 1/3
 xmax2 = 2/3
 
 # Start koordinater
-p_coordinates: list[Coordinates] = [
-    {"y": ry, "x": rx0},
-    {"y": ymax, "x": xmax1},
-    {"y": ymax, "x": xmax2},
-    {"y": ry, "x": rx1}
-]
+p_coordinates: list[Coordinates] = []

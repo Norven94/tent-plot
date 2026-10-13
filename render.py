@@ -16,7 +16,7 @@ def render_tent() -> None:
     ax.legend() 
     plt.show() 
 
-def multi_render_tent() -> None:
+def multi_render_tent(runs: list[int]) -> None:
     fig, ax = plt.subplots() 
     colors = ["blue", "red", "orange", "green"]
 
@@ -28,7 +28,7 @@ def multi_render_tent() -> None:
                 x, y, 
                 marker=".", 
                 linestyle="-", 
-                label="Tent" ,
+                label=f"N = {runs[i]}" ,
                 color=colors[i],
             ) 
         ax.legend() 

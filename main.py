@@ -17,10 +17,12 @@ def start_cli() -> None:
         N = int(input("Hur vill du köra programmet? 1. N = 25, 2. Flera olika val av N, 3. Avsluta"))
 
         if N == 1:
-            init_setup(10)
+            init_setup(25)
             render_tent()
+            globals.p_coordinates.clear()
         elif N == 2:
-            runs = [5, 10, 25, 30]            
+            # Max 4 värden annars måste fler färger läggas till i render.py
+            runs = [5, 10, 25, 100]            
 
             for run in runs:
                 init_setup(run)
@@ -29,7 +31,7 @@ def start_cli() -> None:
                 globals.archive_coordinates.append(globals.p_coordinates.copy())
                 globals.p_coordinates.clear()
 
-            multi_render_tent()
+            multi_render_tent(runs)
         else:
             break
         

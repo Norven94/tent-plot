@@ -34,7 +34,7 @@ def calc_p_force(n: int) -> tuple[float, float]:
     return fx_tot, fy_tot
 
 def calc_fix_point_iteration(N: int) -> None:
-    alpha = 0.02
+    alpha = 0.001
     TOL = 1e-6
     n = 0
     fixed_ns = get_fixed_ns()

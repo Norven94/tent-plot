@@ -23,3 +23,6 @@ xmax2 = 2/3
 
 # Start koordinater
 p_coordinates: list[Coordinates] = []
+
+# Arkiv över koordinater för masskörning
+archive_coordinates: list[list[Coordinates]] = []

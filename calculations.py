@@ -59,7 +59,7 @@ def calc_p_force(n: int) -> tuple[float, float]:
     return fx_tot, fy_tot
 
 # Kör fixpunktsiterationen och uppdaterar respektive partikels position baserat på krafterna som påverkar den.
-def calc_fix_point_iteration(N: int) -> None:
+def run_fix_point_iteration(N: int) -> None:
     alpha = 0.001
     TOL = 1e-6
     n = 0

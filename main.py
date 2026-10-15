@@ -8,7 +8,7 @@ import globals
 
 from helpers import calc_spring_k, calc_p_mass, calc_spring_length, create_initial_coordinates
 from render import render_tent, multi_render_tent
-from calculations import calc_fix_point_iteration
+from calculations import run_fix_point_iteration
 
 def reset() -> None: 
     globals.max_forces.clear()
@@ -20,7 +20,7 @@ def init_setup(N: int) -> None:
     globals.p_mass = calc_p_mass(N)
     globals.spring_length = calc_spring_length(N)
 
-    calc_fix_point_iteration(N)
+    run_fix_point_iteration(N)
 
 def start_cli() -> None:
     while True:

@@ -58,6 +58,7 @@ def calc_p_force(n: int) -> tuple[float, float]:
 
     return fx_tot, fy_tot
 
+# Kör fixpunktsiterationen och uppdaterar respektive partikels position baserat på krafterna som påverkar den.
 def calc_fix_point_iteration(N: int) -> None:
     alpha = 0.001
     TOL = 1e-6
@@ -74,6 +75,7 @@ def calc_fix_point_iteration(N: int) -> None:
                 f_x, f_y = calc_p_force(n)
                 p_forces.append({"f_x": f_x, "f_y": f_y})
 
+        # Vi avslutar iterationen när den partikel med högst kraft har en kraft som är lägre än 10^-6N
         if calc_max_force(p_forces, fixed_ns) < TOL:
             break
         else:     

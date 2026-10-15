@@ -23,7 +23,8 @@ def get_fixed_ns() -> list[int]:
 
     return fixed_ns
 
-# Skapar upp totalt N partiklar inkluderat de fasta punkterna som en startform för tältet med raka linjer
+# Skapar upp totalt N partiklar inkluderat de fasta punkterna som en startform 
+# för tältet med raka linjer
 def create_initial_coordinates(N: int) -> None:
     for n in range(0, N):        
         x = n / (N - 1)
